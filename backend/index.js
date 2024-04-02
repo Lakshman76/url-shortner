@@ -1,8 +1,9 @@
 const express = require("express");
-const urlRoute = require("./routers/url");
 const { connectToDB } = require("./config/connection");
 const URL = require("./models/url");
 const cors = require("cors");
+const urlRoute = require("./routers/url");
+const userRoute = require("./routers/user");
 
 const app = express();
 const PORT = 5000;
@@ -37,7 +38,9 @@ app.get("/api/test", async (req, res) => {
   res.send(allURL);
 });
 
+// Routers
 app.use("/url", urlRoute);
+app.use("/", userRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
